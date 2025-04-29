@@ -51,7 +51,7 @@ def eval_topk(topk_predictions, correct_label_set_list, k, is_plusk=False):
     # Iterate over each scenario
     for idx in range(predictions_size):
 
-        # 对每一个scenario对应的标签动作的序号去重，并获得每一个scenario对应的标签动作的数量
+        # For each scenario, deduplicate its corresponding action indices and obtain the number of label actions for each scenario.
         correct_label_set = set(correct_label_set_list[idx])    # set of indices of correct actions for a specific scenario
 
         correct_label_cnt = len(correct_label_set)  # number of correct actions for a specific scenario
@@ -65,7 +65,7 @@ def eval_topk(topk_predictions, correct_label_set_list, k, is_plusk=False):
         assert n <= len(topk_predictions[idx]), print(n, len(topk_predictions[idx]))
         # Select k indices of predicted action from ranking for a specific scenario
         topk_prediction = set(topk_predictions[idx][:n])
-        # 对每个scenario对应的预测动作与标签取交集。
+        # For each scenario, take the intersection of the predicted actions and the label actions.
         intersection = topk_prediction & correct_label_set
         correct_pred_cnt = len(intersection)    # length of correctly predicted actions corresponding to a specific scenario
         correct_pred_cnt_list.append(correct_pred_cnt)  # list containing number of correctly predicted actions for all scenarios
@@ -79,8 +79,8 @@ def eval_topk(topk_predictions, correct_label_set_list, k, is_plusk=False):
         recall_list.append(recall)
 
     is_in = sum(isin_list) / predictions_size   # final is_in score
-    macro_recall = sum(recall_list) / predictions_size   # final macro recall score （单个scenario的平均召回率）
-    micro_recall = sum(correct_pred_cnt_list) / sum(correct_label_cnt_list)     # 全局召回率
+    macro_recall = sum(recall_list) / predictions_size   # final macro recall score (average recall rate per scenario)
+    micro_recall = sum(correct_pred_cnt_list) / sum(correct_label_cnt_list)     # micro_recall
     
     return {'is_in':is_in, 'macro_recall':macro_recall, 'micro_recall':micro_recall}
 

@@ -5,12 +5,12 @@ gpt4o
 """
 
 
-from openai import OpenAI
 import json
 import os
 import my_utils
 import time
 import tqdm
+from openai import OpenAI
 from dotenv import load_dotenv
 
 

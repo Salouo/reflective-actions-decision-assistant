@@ -55,7 +55,7 @@ def main():
         generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False
     )[0]
 
-    # do not print the prompt
+    # Do not print the prompt
     if "<image>" in prompt:
         prompt = prompt.replace("<image>", " ")
     generated_text = generated_text.replace(prompt, "")
