@@ -9,4 +9,4 @@ Use `llm_eval` to evaluate the performance of models across top-1 accuracy, top-
 
 Use `requirements.txt` to install the required environment.
 
-However, data is not availabel.
+However, `data` is not availabel.
