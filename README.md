@@ -1,6 +1,6 @@
 # Guide
 
-`asagi_generate.py`, `gpt_generate.py`, and `sarashina_generate.py` are used to predict appropriate actions based on given prompts.
+`asagi_generate.py`, `gpt_generate.py`, and `sarashina_generate.py` are used to generate appropriate actions based on given prompts.
 
 
 `prompts` folder includes prompts to guide LLM and VLM.
