@@ -16,24 +16,17 @@ from huggingface_hub import snapshot_download
 
 def main(system_prompt, user_agent_prompts_base, revised_images):
     # Set random seed
-    transformers.set_seed(0)
-
-    # Download the pretrained models
-    snapshot_download(
-        repo_id="MIL-UT/Asagi-8B",
-        local_dir="/gs/bs/tga-c-ird-lab/chen/considerate-robot/my_models/Asagi-8B",
-        local_dir_use_symlinks=False
-    )
+    transformers.set_seed(42)
 
     # Load the pretrained model
-    model_path = "/gs/bs/tga-c-ird-lab/chen/considerate-robot/my_models/Asagi-8B"
+    model_path = "MIL-UT/Asagi-14B"
+    cache_dir = "/gs/bs/tga-c-ird-lab/chen/considerate-robot/models_cache/asagi-1bB"
     processor = AutoProcessor.from_pretrained(model_path)
     model = AutoModel.from_pretrained(
         model_path, trust_remote_code=True,
         torch_dtype=torch.bfloat16,
         device_map="auto"
     )
-
     # Set generation_configuration
     generation_config = GenerationConfig(
         do_sample=True,
@@ -44,6 +37,7 @@ def main(system_prompt, user_agent_prompts_base, revised_images):
     )
 
     # Create prompt
+    instruction = "以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。\n\n"
     i = 0
     for user_agent_prompt_base, image in tqdm.tqdm(zip(user_agent_prompts_base, revised_images)):
         if i == 10:
@@ -56,27 +50,25 @@ def main(system_prompt, user_agent_prompts_base, revised_images):
         ref_user_prompt += f"ユーザの位置: {user_agent_prompt_base['ref_position']}\n"
         ref_user_prompt += f"ユーザが手にしている物: {user_agent_prompt_base['ref_has']}\n"
         ref_user_prompt += f"ユーザの近くにある物: {user_agent_prompt_base['ref_near_objs']}"
-
+        ref_user_prompt += f"### 応答:\n"
         ref_agent_prompt = '\n'.join(user_agent_prompt_base['ref_answer'])
         ref_agent_prompt += "\n[回答終了]"
-
+        '''
+        '''
         user_prompt = "【ユーザの状況】\n"
         user_prompt += f"ユーザの発話: {user_agent_prompt_base['uttr']}\n"
         user_prompt += f"ユーザの位置: {user_agent_prompt_base['position']}\n"
         user_prompt += f"ユーザが手にしている物: {user_agent_prompt_base['has']}\n"
         user_prompt += f"ユーザの近くにある物: {user_agent_prompt_base['near_objs']}"
-        user_prompt += f"### 指示:\n<image>\nこの画像を見て、行動カテゴリとその行動カテゴリに割り振られた番号だけを各行動カテゴリごとに改行して出力してください。\n\n### 応答:\n"
-
-        # CoT
-        cot = 0
-        if cot:
-            user_prompt += "日常生活の常識に基づいて、順を追って考え、答えを出してください。"
-
-        prompt = system_prompt + '\n' + ref_user_prompt + '\n' + ref_agent_prompt + '\n' + user_prompt
         '''
-        prompt = f"### 指示:\n<image>\nこの画像を見たとき、次の2つの動作の選択肢が与えられます。(a) 机を片付ける (b) コップを持ってくる。回答としては、どちらか1つの選択肢のみを出力してください。\n\n### 応答:\n"
+        user_prompt = f"### 指示:\n<image>\nユーザの発話: {user_agent_prompt_base['uttr']}\nあなたがロボットなら、この画像とユーザーの会話を踏まえて、どんな行動すればいいですか。番号のみ出力してください。"
+
+        prompt = instruction + user_prompt + '\n\n' + system_prompt + '\n### 応答:\n'
+
+        #prompt = ("以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。\n\n"
+        #            "### 指示:\n<image>\nあなたは誰ですか。\n\n### 応答:\n")
         inputs = processor(
-            text=prompt, images=[image], return_tensors="pt"
+            text=prompt, images=image, return_tensors="pt"
         )
         inputs_text = processor.tokenizer(prompt, return_tensors="pt")
         inputs['input_ids'] = inputs_text['input_ids']
@@ -95,18 +87,19 @@ def main(system_prompt, user_agent_prompts_base, revised_images):
         )[0]
 
         # Do not print the prompt
-        if "<image>" in prompt:
-            prompt = prompt.replace("<image>", " ")
-        generated_text = generated_text.replace(prompt, "")
+        #if "<image>" in prompt:
+        #    prompt = prompt.replace("<image>", " ")
+        #generated_text = generated_text.replace(prompt, "")
 
         print(f"Generated text: {generated_text}")
 
+
 if __name__ == "__main__":
-    with open('data/system_prompt_v1.txt') as f:
+    with open('prompts/options_prompt.txt') as f:
         system_prompt = f.read()
-    with open('data/prompt.json', 'r') as f:
+    with open('data/prompt.jsonl', 'r') as f:
         user_agent_prompts_base = [json.loads(l.strip()) for l in f]
     with open('data/revised_images.pkl', 'rb') as f:
         revised_images = pickle.load(f)
 
-    main(system_prompt, user_agent_prompts_base, revised_images)
+    main(system_prompt, user_agent_prompts_base[10:], revised_images)

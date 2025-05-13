@@ -1,2 +1,3 @@
 `revised_scenario_idxs.pickle` 
 是一个字典，里面有两个key：'no_option' 'revised'，其中revised这个key里面有着从原来400个场景中挑选出的共355个序号，no_option则是剩下的没有选项被剔除的场景。
+

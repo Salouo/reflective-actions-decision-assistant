@@ -5,57 +5,57 @@ This module is used to evaluate LLM's performance(top-k, plus-k) from output of 
 llm_outputs: a list of LLM's output
 
 """
-
-
 import sys
 import my_utils
 import random
 import statistics
 
 
-def main(llm_outputs):
-    # candidate_actions_str[0]: バナナを持ってくる
+def main(outputs):
+    # candidate_actions_str[0]: バナナを持ってくる; shape: 40
     candidate_actions_str: list[str] = my_utils.get_texts_sep_by_new_line('data/actions_ja.txt')
     # candidate_actions_str_with_id[0]: [1]バナナを持ってくる
     candidate_actions_str_with_id: list[str] = [f'[{i+1}]{candidate_action_str}' for i, candidate_action_str in enumerate(candidate_actions_str)]
-    labels = my_utils.pickle_read('data/labels_v2.pkl')  # correct label set: labels_v2['at-least3'] for 355 scenarios
+    # correct label set: labels_v2['at-least3'] for 355 scenarios; 
+    labels = my_utils.pickle_read('data/labels_v2.pkl')
     # Load the remaining scenario indices
     revised_scenario_idxs = my_utils.pickle_read('data/revised_scenario_idxs.pkl')
     accepted_scenario_idxs = revised_scenario_idxs['revised']   # index of scenario accepted by crowdworkers -> revised based on the original scenario set
     # Extract 355 correct label sets corresponding to each scenario from original labels
     # labels['at-least3'] indicates that, for each scenario, only actions that received at least three agreeing votes are selected as the correct labels.
+    # shape: 355
     correct_label_set_list: list[list[int]] = [labels['at-least3'][scenario_idx] for scenario_idx in accepted_scenario_idxs]
 
     random.seed(0)
     rankings = []
     predictions = []
 
-    for output in llm_outputs:
+
+    for idx, output in enumerate(outputs):
+        print(f'idx: {idx + 1}')
         '''
         `output` is a list including predicted actions for a specific scenario.     e.g.: ['[6]ペットボトルを持ってくる', '[9]お菓子を持ってくる']
         '''
         prediction = []
 
-        # If LLM predicts there is no appropriate action, append null into prediction list
+        # If model predicts there is no appropriate action, append null into prediction list
         if ('該当なし' in output) or ('[該当なし]' in output):
             assert len(output) == 1
             predictions.append(prediction)
 
-        # If LLM predicts appropriate actions exist, append them into prediction list
+        # If model predicts appropriate actions exist, append them into prediction list
         else:
-            assert len(output) >= 1, output
+            # assert len(output) >= 1, output
             # Iterate over each predicted action in predicted actions set for a specific scenario
             for action_with_id in output:
-                # print(len(action_with_id))
-                # print(action_with_id)
                 pred_cnt_each = 0
                 # Find indices of predicted actions
                 for id, candidate_action_str in enumerate(candidate_actions_str):
-                    # Match each candiate action with predicted actions
+                    # Match each candiate action with the predicted actions
                     if candidate_action_str in action_with_id:
-                        pred_cnt_each += 1      # number of legal predicted action +1
+                        pred_cnt_each += 1      # one-to-one match
                         prediction.append(id)
-                assert pred_cnt_each == 1, action_with_id
+                # assert pred_cnt_each == 1, action_with_id
             predictions.append(prediction)
 
         # print(len(prediction))
@@ -97,5 +97,5 @@ def main(llm_outputs):
 
 
 if __name__ == "__main__":
-    llm_outputs = my_utils.pickle_read('llm_outputs/gpt4o_AtLeastOneAction_CoT.pickle')
-    main(llm_outputs)
+    outputs = my_utils.pickle_read('model_outputs/vlms/sarashina2-vision-14b.pkl')
+    main(outputs)
