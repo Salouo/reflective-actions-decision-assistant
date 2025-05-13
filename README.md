@@ -1,6 +1,11 @@
 # Introduction
 
 This study focus on developing a robot which can handle ambiguous user's command. In the previous experiment, we are experimenting with a method that leverages the powerful reasoning capabilities of LLMs to predict appropriate actions based on given actions.
+
+
+The system prompt is shown as followings.
+
+
 ```text
 You are an assistant that, based on the user’s situation in the living room, comes up with thoughtful actions for a support robot to perform.  
 A thoughtful action is one that has not been explicitly instructed but is useful to the user.  
