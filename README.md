@@ -3,7 +3,7 @@
 This study focus on developing a robot which can handle ambiguous user's command. In the previous experiment, we are experimenting with a method that leverages the powerful reasoning capabilities of LLMs to predict appropriate actions based on given actions.
 
 
-The system prompt is shown as followings.
+The system prompt is shown as followings:
 
 
 ```text
@@ -71,6 +71,9 @@ Below is the list of 40 action categories:
 
 
 `extract_revised_image.py` is used to extract images, which are aligned with user's instructions, from raw images.
+
+
+`model_eval.py` is used to evaluate the top-k accuracy of model based on predictd actions.
 
 # Notification
 Raw data is not publicly available.
