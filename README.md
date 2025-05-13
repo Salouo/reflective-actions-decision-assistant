@@ -7,3 +7,6 @@
 
 
 `extract_revised_image.py` is used to extract images, which are aligned with user's instructions, from raw images.
+
+# Notification
+Raw data is not publicly available.
