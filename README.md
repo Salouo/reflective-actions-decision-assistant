@@ -1,10 +1,14 @@
-# Introduction
+# 🤖 Ambiguous-Command Robot Assistant
 
-This study focus on developing a robot which can handle ambiguous user's command. In the previous experiment, we are experimenting with a method that leverages the powerful reasoning capabilities of LLMs to predict appropriate actions based on given actions.
+*A lightweight toolkit for teaching a home robot to infer “thoughtful” actions from ambiguous user commands with LLMs / VLMs.*
 
+---
 
-The system prompt is shown as followings:
+## Introduction
+This project aims to develop a support robot that can understand **ambiguous** user commands and proactively perform helpful actions.  
+Our current method leverages the reasoning power of Large Language Models (LLMs) and Vision-Language Models (VLMs) to predict the best actions in a living-room scenario.
 
+The **system prompt** guiding the model is shown below:
 
 ```text
 You are an assistant that, based on the user’s situation in the living room, comes up with thoughtful actions for a support robot to perform.  
@@ -59,21 +63,15 @@ Below is the list of 40 action categories:
 [38] Put the tupperware in the microwave  
 [39] Put the tupperware in the refrigerator  
 [40] Put the thermos on the shelf  
-----------  
-```
+----------
 
-# How to use
-
-`asagi_generate.py`, `gpt_generate.py`, and `sarashina_generate.py` are used to generate appropriate actions based on given prompts.
-
-
-`prompts` folder includes prompts to guide LLM and VLM.
-
-
-`extract_revised_image.py` is used to extract images, which are aligned with user's instructions, from raw images.
+| Script                         | Purpose                                              |
+| ------------------------------ | ---------------------------------------------------- |
+| **`asagi_generate.py`**        | Generate actions with the Asagi VLM                  |
+| **`gpt_generate.py`**          | Generate actions with a text-only LLM (e.g., GPT-4o) |
+| **`sarashina_generate.py`**    | Generate actions with the Sarashina VLM              |
+| **`extract_revised_image.py`** | Extract scene images aligned with user commands      |
+| **`model_eval.py`**            | Compute top-k accuracy of predicted actions          |
 
 
-`model_eval.py` is used to evaluate the top-k accuracy of model based on predictd actions.
 
-# Notification
-Raw data is not publicly available.
