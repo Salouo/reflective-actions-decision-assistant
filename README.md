@@ -1,4 +1,4 @@
-# 🤖 Ambiguous-Command Robot Assistant
+# 🤖 Considerate Robot
 
 ## Introduction
 This project aims to develop a support robot that can understand **ambiguous** user commands and proactively perform helpful actions.  
@@ -61,7 +61,7 @@ Below is the list of 40 action categories:
 [40] Put the thermos on the shelf  
 ----------
 ```
-## 🚀How to use
+## 🚀 How to use
 
 | Script                         | Purpose                                              |
 | ------------------------------ | ---------------------------------------------------- |
@@ -72,6 +72,6 @@ Below is the list of 40 action categories:
 | **`model_eval.py`**            | Compute top-k accuracy of predicted actions          |
 
 
-## 📢Notification
+## 📢 Notification
 Raw image data is not publicly available.
 
