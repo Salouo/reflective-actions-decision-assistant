@@ -1,9 +1,5 @@
 # 🤖 Ambiguous-Command Robot Assistant
 
-*A lightweight toolkit for teaching a home robot to infer “thoughtful” actions from ambiguous user commands with LLMs / VLMs.*
-
----
-
 ## Introduction
 This project aims to develop a support robot that can understand **ambiguous** user commands and proactively perform helpful actions.  
 Our current method leverages the reasoning power of Large Language Models (LLMs) and Vision-Language Models (VLMs) to predict the best actions in a living-room scenario.
@@ -65,7 +61,7 @@ Below is the list of 40 action categories:
 [40] Put the thermos on the shelf  
 ----------
 ```
-## How to use
+## 🚀How to use
 
 | Script                         | Purpose                                              |
 | ------------------------------ | ---------------------------------------------------- |
@@ -76,6 +72,6 @@ Below is the list of 40 action categories:
 | **`model_eval.py`**            | Compute top-k accuracy of predicted actions          |
 
 
-## Notification
+## 📢Notification
 Raw image data is not publicly available.
 
