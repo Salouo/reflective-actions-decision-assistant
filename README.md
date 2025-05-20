@@ -1,4 +1,4 @@
-# 🤖 Considerate Robot
+# 💗 Reflective Actions Decision Assistant
 
 ## Introduction
 This project aims to develop a support robot that can understand **ambiguous** user commands and proactively perform helpful actions.  
@@ -63,13 +63,17 @@ Below is the list of 40 action categories:
 ```
 ## 🚀 How to use
 
-| Script                         | Purpose                                              |
-| ------------------------------ | ---------------------------------------------------- |
-| **`asagi_generate.py`**        | Generate actions with the Asagi VLM                  |
-| **`gpt_generate.py`**          | Generate actions with a text-only LLM (e.g., GPT-4o) |
-| **`sarashina_generate.py`**    | Generate actions with the Sarashina VLM              |
-| **`extract_revised_image.py`** | Extract scene images aligned with user commands      |
-| **`model_eval.py`**            | Compute top-k accuracy of predicted actions          |
+**`asagi_generate.py`**: Generate reflective actions with the Asagi VLM
+
+**`gpt_generate.py`**: Generate reflective actions with a GPT-4o VLM
+
+**`sarashina2-vision_generate.py`**: Generate reflective actions with the Sarashina VLM   
+
+**`llm-jp-3-instruct_generate.py`**: Generate reflective actions with the Sarashina VLM 
+
+**`extract_revised_image.py`**: Extract scene images aligned with user utterances
+
+**`model_eval.py`**: Evaluate the performance of model by compute top-k accuracy of predicted actions
 
 
 ## 📢 Notification
