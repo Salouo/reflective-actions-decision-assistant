@@ -1,8 +1,7 @@
 # 💗 Reflective Actions Decision Assistant
 
-## Introduction
-This project aims to develop a support robot that can understand **ambiguous** user commands and proactively perform helpful actions.  
-Our current method leverages the reasoning power of Large Language Models (LLMs) and Vision-Language Models (VLMs) to predict the best actions in a living-room scenario.
+## 💬 Introduction
+This project aims to let Vision-Language Models (VLMs) and Large Language Models (LLMs) act as an assistant that can understand **ambiguous** user commands and proactively perform reflective actions. We leverages the reasoning power of VLMs and LLMs to predict the best actions in real-world scenarios.
 
 The **system prompt** guiding the model is shown below:
 
@@ -74,6 +73,11 @@ Below is the list of 40 action categories:
 **`extract_revised_image.py`**: Extract scene images aligned with user utterances
 
 **`model_eval.py`**: Evaluate the performance of model by compute top-k accuracy of predicted actions
+
+## 🪨 Limitations
+1. Sometimes VLMs can not follow the output format given which makes it difficult to evaluate the models.
+2. The number of actions are fixed, which means that the assistant cannot perform well at other situations
+3. The information in images can not be fully utilized by VLMs, because the performance goes down when we add the \<image\> token in the prompt.
 
 
 ## 📢 Notification
