@@ -68,7 +68,7 @@ Below is the list of 40 action categories:
 
 **`sarashina2-vision_generate.py`**: Generate reflective actions with the Sarashina VLM   
 
-**`llm-jp-3-instruct_generate.py`**: Generate reflective actions with the Sarashina VLM 
+**`llm-jp-3-instruct_generate.py`**: Generate reflective actions with the LLM-jp-3-instruct LLM 
 
 **`extract_revised_image.py`**: Extract scene images aligned with user utterances
 
