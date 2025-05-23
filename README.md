@@ -62,6 +62,8 @@ Below is the list of 40 action categories:
 ```
 ## 🚀 How to use
 
+You can use various LLMs/VLMs to simulate which action will be taken by considerate robot in the daily-life scenarios. 
+
 **`asagi_generate.py`**: Generate reflective actions with the Asagi VLM
 
 **`gpt_generate.py`**: Generate reflective actions with a GPT-4o VLM
