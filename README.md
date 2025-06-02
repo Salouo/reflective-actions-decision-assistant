@@ -6,7 +6,7 @@ This project aims to let Vision-Language Models (VLMs) and Large Language Models
 The **system prompt** guiding the model is shown below:
 
 ```text
-You are a robot that selects reflective actions to assist users, based on the their ambiguous utterances,
+You are a robot that selects reflective actions to assist users, based on the their ambiguous utterances.
 A reflective action is one that has not been explicitly instructed but is useful to the user.  
 Given the user’s situation, select all of the appropriate reflective actions that the robot should perform from the 40 action categories listed below.
 
