@@ -1,4 +1,4 @@
-# 🤖 Reflective Actions Decision Assistant
+# Reflective Actions Decision Assistant
 
 ## 💬 Introduction
 This project aims to let Vision-Language Models (VLMs) and Large Language Models (LLMs) act as an assistant that can understand **ambiguous** user commands and proactively perform reflective actions. We leverages the reasoning power of VLMs and LLMs to predict the best actions in real-world scenarios.
