@@ -135,8 +135,8 @@ You can use various LLMs/VLMs to simulate a considerate robot. We can see which 
 
 
 ## 🪨 Limitations
-1. Many VLMs can not follow the output format given which makes it difficult to evaluate the models.
-2. The information in images can not be fully utilized by VLMs, because the performance goes down when we add the \<image\> token in the prompt.
+- Many VLMs can not follow the output format given which makes it difficult to evaluate the models.
+- The information in images can not be fully utilized by VLMs, because the performance goes down when we add the \<image\> token in the prompt.
 
 
 ## 📢 Notification
