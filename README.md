@@ -122,7 +122,7 @@ You can use various LLMs/VLMs to simulate a considerate robot. We can see which 
 | GPT-4 | 1555 | — |
 | llm-jp-3-13b-instruct | 790 | — |
 
-------------------------------------------------------------------
+---
 - **Unfine-tuned mid-scale VLMs struggle on downstream reasoning tasks.**  
   Without task-specific fine-tuning, many mid-scale VLMs tend to output generic image descriptions rather than follow the required response format. As a result, most VLMs are unusable on this dataset. This limitation is likely related to the short prompt lengths used during VLM training.
 
