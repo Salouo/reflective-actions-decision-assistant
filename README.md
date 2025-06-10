@@ -123,13 +123,16 @@ You can use various LLMs/VLMs to simulate a considerate robot. We can see which 
 | llm-jp-3-13b-instruct | 790 | — |
 
 ---
-- **Unfine-tuned mid-scale VLMs struggle on downstream reasoning tasks.**  
+- **Unfine-tuned mid-scale VLMs struggle on downstream reasoning tasks.**
+  
   Without task-specific fine-tuning, many mid-scale VLMs tend to output generic image descriptions rather than follow the required response format. As a result, most VLMs are unusable on this dataset. This limitation is likely related to the short prompt lengths used during VLM training.
 
-- **VLM text encoders can outperform size-matched LLMs in understanding image information represented in text.**  
+- **VLM text encoders can outperform size-matched LLMs in understanding image information represented in text.**
+  
   With annotation only, sarashina2-vision-14b outperforms the similarly sized llm-jp-3-13b-instruct, indicating that multimodal pre-training helps the text encoder capture visual cues embedded in the annotation.
 
-- **Image utility depends on model scale.**  
+- **Image utility depends on model scale.**
+  
   Supplying visual input boosts accuracy only for very large VLMs; for mid-scale models it even degrades performance.
 
 
