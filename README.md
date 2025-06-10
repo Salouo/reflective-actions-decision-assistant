@@ -1,4 +1,4 @@
-# 💗 Reflective Actions Decision Assistant
+# 🤖 Reflective Actions Decision Assistant
 
 ## 💬 Introduction
 This project aims to let Vision-Language Models (VLMs) and Large Language Models (LLMs) act as an assistant that can understand **ambiguous** user commands and proactively perform reflective actions. We leverages the reasoning power of VLMs and LLMs to predict the best actions in real-world scenarios.
@@ -60,7 +60,7 @@ Below is the list of 40 action categories:
 [40] Put the thermos on the shelf  
 ----------
 ```
-## 🚀 How to use
+## ✅ How to use
 
 You can use various LLMs/VLMs to simulate a considerate robot. We can see which reflective actions will be taken by the considerate robot in daily-life scenarios. 
 
@@ -76,10 +76,56 @@ You can use various LLMs/VLMs to simulate a considerate robot. We can see which 
 
 **`model_eval.py`**: Evaluate the performance of model by compute top-k accuracy of predicted actions
 
+## 🔥 Current Results
+### Top-1 accuracy (%)
+
+| Model | Anno. (%) | Anno.+Img. (%) |
+|-------|-----------|----------------|
+| GPT-4o | 72.4 | **76.6** |
+| sarashina2-vision-14b | 51.3 | 43.4 |
+| multi-hop (Yamasaki 2024) | 45.4 | — |
+| GPT-4 | **74.1** | — |
+| llm-jp-3-13b-instruct | 36.1 | — |
+
+---
+
+### Top-3 accuracy (%)
+
+| Model | Anno. (%) | Anno.+Img. (%) |
+|-------|-----------|----------------|
+| GPT-4o | **81.7** | **83.1** |
+| sarashina2-vision-14b | 56.6 | 48.2 |
+| multi-hop (Yamasaki 2024) | 70.7 | — |
+| GPT-4 | **81.7** | — |
+| llm-jp-3-13b-instruct | 43.4 | — |
+
+---
+
+### Top-5 accuracy (%)
+
+| Model | Anno. (%) | Anno.+Img. (%) |
+|-------|-----------|----------------|
+| GPT-4o | **83.9** | **85.6** |
+| sarashina2-vision-14b | 60.6 | 52.4 |
+| multi-hop (Yamasaki 2024) | 76.6 | — |
+| GPT-4 | 83.4 | — |
+| llm-jp-3-13b-instruct | 52.4 | — |
+
+---
+
+### Average inference time per sample (ms) – Top-1 setting
+
+| Model | Anno. (ms) | Anno.+Img. (ms) |
+|-------|------------|-----------------|
+| GPT-4o | 730 | 3530 |
+| sarashina2-vision-14b | 750 | 1530 |
+| GPT-4 | 1555 | — |
+| llm-jp-3-13b-instruct | 790 | — |
+
+
 ## 🪨 Limitations
-1. Sometimes VLMs can not follow the output format given which makes it difficult to evaluate the models.
-2. The number of actions are fixed, which means that the assistant cannot perform well at other situations
-3. The information in images can not be fully utilized by VLMs, because the performance goes down when we add the \<image\> token in the prompt.
+1. Many VLMs can not follow the output format given which makes it difficult to evaluate the models.
+2. The information in images can not be fully utilized by VLMs, because the performance goes down when we add the \<image\> token in the prompt.
 
 
 ## 📢 Notification
