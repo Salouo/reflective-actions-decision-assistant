@@ -97,3 +97,14 @@ def get_texts_sep_by_new_line(src_path):
             texts.append(content)
     return texts
 
+def regularize_response(response: str) -> str:
+    # Sometimes the last character of responses is `[`.
+    if response.endswith('['):
+        response = response[:-1]
+    response = response.strip().split('\n')
+    # Sometimes responses are not followed by [回答終了].
+    if response[-1] == "[回答終了]": 
+        response = response[:-1]
+    # Return the regularized response
+    return response
+
