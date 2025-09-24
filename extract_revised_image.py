@@ -7,7 +7,8 @@ from PIL import Image
 
 with open('data/revised_scenario_idxs.pkl', 'rb') as f:
     revised_idx = pickle.load(f)['revised']
-
+print(revised_idx)
+exit()
 # Load all 400 raw image paths
 file_paths = glob.glob('data/raw_images/*.jpg')
 # Sort in-placed based on file name

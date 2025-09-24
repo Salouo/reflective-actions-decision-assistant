@@ -56,16 +56,18 @@ def main(system_message, user_agent_prompts_base, image_urls):
             {"role": "system", "content": system_message},
             {"role": "user", "content": ref_user_prompt},
             {"role": "assistant", "content": ref_agent_prompt},
-            {"role": "user",
-            "content": [
-                {"type": "text", "text": "以下の写真をご覧ください。"},
-                {"type":"image_url", "image_url": {"url": f"{image_url}"}}
-            ]},
+            
+            #{"role": "user",
+            #"content": [
+            #    {"type": "text", "text": "以下の写真をご覧ください。"},
+            #    {"type":"image_url", "image_url": {"url": f"{image_url}"}}
+            #]},
+            
             {"role": "user", "content": user_prompt}
         ]
         start_time = time.time()
         completion = client.chat.completions.create(
-            model="gpt-4o-2024-11-20",
+            model="gpt-4-0613",
             messages=messages,
             max_tokens=1900,
             temperature=0.0,
@@ -81,7 +83,7 @@ def main(system_message, user_agent_prompts_base, image_urls):
         # Convert the current iteration output from LLM to a list
         outputs.append(response)
 
-    my_utils.pickle_write(outputs, 'model_outputs/vlms/gpt4o/anno-and-img.pkl', overwrite=True)
+    my_utils.pickle_write(outputs, 'model_outputs/llms/gpt4/anno.pkl', overwrite=True)
     print(f'running time: {(running_time) / 60:.3f}min')
 
 
